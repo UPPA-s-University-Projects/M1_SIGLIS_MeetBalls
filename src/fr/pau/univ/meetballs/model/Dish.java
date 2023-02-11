@@ -10,11 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table("Dish")
+@Table(name = "Dish")
+@NamedQueries({
+	
+})
 public class Dish {
 	private int id;
 	private String nom;
