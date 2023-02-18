@@ -17,30 +17,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-//@Entity
-//@Table("SimpleMsg")
+@Entity
+@Table(name="SimpleMsg")
 public class SimpleMsg {
+	
 	private int id;
-	private int idUsr1;
-	private int idUsr2;
+	private Discussion discussionId;
+	private User sender;
 	private Date msgStamp;
 	private String msg;
+	
 	/**
 	 * @param id
-	 * @param idUsr1
-	 * @param idUsr2
+	 * @param discussionId
+	 * @param sender
 	 * @param msgStamp
 	 * @param msg
 	 */
-	public SimpleMsg(int id, int idUsr1, int idUsr2, Date msgStamp, String msg) {
+	public SimpleMsg(int id, Discussion discussionId, User sender, Date msgStamp, String msg) {
 		super();
 		this.id = id;
-		this.idUsr1 = idUsr1;
-		this.idUsr2 = idUsr2;
+		this.discussionId = discussionId;
+		this.sender = sender;
 		this.msgStamp = msgStamp;
 		this.msg = msg;
 	}
+	
 	public SimpleMsg() {}
+	
 	/**
 	 * @return the id
 	 */
@@ -56,34 +60,36 @@ public class SimpleMsg {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	/**
-	 * @return the idUsr1
+	 * @return the discussionId
 	 */
 	@OneToOne(optional=false)
-	@JoinColumn(name = "fk_id_usr1", referencedColumnName = "id")
-	public int getIdUsr1() {
-		return idUsr1;
+	@JoinColumn(name = "fk_id_discussion", referencedColumnName = "id")
+	public Discussion getDiscussionId() {
+		return discussionId;
+	}
+	/**
+	 * @param discussionId the discussionId to set
+	 */
+	public void setDiscussionId(Discussion discussionId) {
+		this.discussionId = discussionId;
 	}
 	/**
 	 * @param idUsr1 the idUsr1 to set
 	 */
-	public void setIdUsr1(int idUsr1) {
-		this.idUsr1 = idUsr1;
+	public void setSender(User sender) {
+		this.sender = sender;
 	}
 	/**
-	 * @return the idUsr2
+	 * @return the User object of our sender
 	 */
 	@OneToOne(optional=false)
-	@JoinColumn(name = "fk_id_usr2", referencedColumnName = "id")
-	public int getIdUsr2() {
-		return idUsr2;
+	@JoinColumn(name = "fk_id_sender", referencedColumnName = "id")
+	public User getSender() {
+		return this.sender;
 	}
-	/**
-	 * @param idUsr2 the idUsr2 to set
-	 */
-	public void setIdUsr2(int idUsr2) {
-		this.idUsr2 = idUsr2;
-	}
+	
 	/**
 	 * @return the msgStamp
 	 */

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table("CookType")
+@Table(name="CookType")
 public class CookType {
 	private int id;
 	private String designation;

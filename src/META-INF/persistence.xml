@@ -6,6 +6,8 @@
 		<class>fr.pau.univ.meetballs.model.Diet</class>
 		<class>fr.pau.univ.meetballs.model.Dish</class>
 		<class>fr.pau.univ.meetballs.model.User</class>
+		<class>fr.pau.univ.meetballs.model.Discussion</class>
+		<class>fr.pau.univ.meetballs.model.SimpleMsg</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
