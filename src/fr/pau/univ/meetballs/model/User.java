@@ -47,9 +47,7 @@ public class User {
 	
 	
 	
-	public User() {
-		
-	}
+	public User() {}
 	
 	/**
 	 * @param id
@@ -119,6 +117,20 @@ public class User {
 		this.toMatch = toMatch;
 	}
 	
+	
+	
+	public User(boolean desert, List<Diet> diets, List<CookType> favCookType,
+			List<User> likedUsers, List<User> dislikedUser, List<User> toMatch, float tauxCuisson) {
+		super();
+		this.desert = desert;
+		this.diets = diets;
+		this.favCookType = favCookType;
+		this.likedUsers = likedUsers;
+		this.dislikedUser = dislikedUser;
+		this.toMatch = toMatch;
+		this.tauxCuisson = tauxCuisson;
+	}
+
 	/*=====================================================================================================================================
 	 *
 	 * STATE MACHINE - MATCHING ALGORITHM
@@ -169,7 +181,26 @@ public class User {
 	}
 
 	
-
+	/*=====================================================================================================================================
+	 *
+	 * CRUDE 
+	 * 
+	 =====================================================================================================================================*/
+	public void addObjectToList(List<Object> l, Object o ) {
+		l.add(o);
+	}
+	
+	public void removeObjectFromList(List<Object> l, Object o) {
+		l.remove(o);
+	}
+	
+	
+	
+	/*=====================================================================================================================================
+	 *
+	 * GETTERS & SETTERS
+	 * 
+	 =====================================================================================================================================*/	
 	/**
 	 * @return the id
 	 */
