@@ -23,7 +23,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="Usr")
-public class User {
+public class User<T> {
 	//Nos attributs pour nos utilisateurs
 	private int id;
 	private String nom;
@@ -42,7 +42,7 @@ public class User {
 	//Un utilisateur a plusieurs type de cuisine favorie.
 	private List<CookType> favCookType;
 	
-	private List<User> likedUsers, dislikedUser, toMatch;
+	private List<User> likedUsers, dislikedUser, toMatch, matched;
 	private float tauxCuisson;
 	
 	
@@ -180,17 +180,30 @@ public class User {
 		return matchingCandidates;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public void likedUser(User lU) {
+		//Nous ajoutons notre utilisateur à notre liste des utilisateurs liker
+		addObjectToList((List<T>) likedUsers, lU);
+		
+		//Si l'autre utilisateur nous a liker, nous lions les deux utilisateurs avec la table macthed.
+		if(lU.getLikedUsers().contains(this)) {
+			addObjectToList((List<T>) matched, lU);
+			addObjectToList(lU.getMatched(), this);
+		}
+	}
+	
 	
 	/*=====================================================================================================================================
 	 *
 	 * CRUDE 
 	 * 
 	 =====================================================================================================================================*/
-	public void addObjectToList(List<Object> l, Object o ) {
-		l.add(o);
+	public void addObjectToList(List<T> l, Object o ) {
+		l.add((T) o);
 	}
 	
-	public void removeObjectFromList(List<Object> l, Object o) {
+	public void removeObjectFromList(List<T> l, Object o) {
 		l.remove(o);
 	}
 	
@@ -455,6 +468,22 @@ public class User {
 	 */
 	public void setTauxCuisson(float tauxCuisson) {
 		this.tauxCuisson = tauxCuisson;
+	}
+
+	public List<User> getToMatch() {
+		return toMatch;
+	}
+
+	public void setToMatch(List<User> toMatch) {
+		this.toMatch = toMatch;
+	}
+
+	public List<User> getMatched() {
+		return matched;
+	}
+
+	public void setMatched(List<User> matched) {
+		this.matched = matched;
 	}
 	
 	

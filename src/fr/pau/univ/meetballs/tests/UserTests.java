@@ -1,7 +1,8 @@
 package fr.pau.univ.meetballs.tests;
 
-import static org.assertj.core.api.Assertions.fail;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -85,6 +86,13 @@ public class UserTests {
 		fail(Float.toString(uList.get(4).getTauxCuisson())); //Le résultat du dernier utilisateur < 23%, donc il n'est pas ajouté à la liste
 	}
 	
+	@Test
+	static void testMatch() {
+		u2.addObjectToList(u2.getLikedUsers(), u1);
+		u1.addObjectToList(u1.getLikedUsers(), u2);
+		
+		assertNull(u1.getLikedUsers());
+	}
 	
 	
 	
