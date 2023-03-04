@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="SimpleMsg")
-public class SimpleMsg {
+public class Message {
 	
 	private int id;
 	private Discussion discussionId;
@@ -34,7 +34,7 @@ public class SimpleMsg {
 	 * @param msgStamp
 	 * @param msg
 	 */
-	public SimpleMsg(int id, Discussion discussionId, User sender, Date msgStamp, String msg) {
+	public Message(int id, Discussion discussionId, User sender, Date msgStamp, String msg) {
 		super();
 		this.id = id;
 		this.discussionId = discussionId;
@@ -43,7 +43,7 @@ public class SimpleMsg {
 		this.msg = msg;
 	}
 	
-	public SimpleMsg() {}
+	public Message() {}
 	
 	/**
 	 * @return the id
