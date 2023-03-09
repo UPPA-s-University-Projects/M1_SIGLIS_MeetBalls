@@ -1,44 +1,46 @@
 package fr.pau.univ.meetballs.dao.impl.bdd;
 
-import fr.pau.univ.meetballs.dao.interfaces.IDietDao;
+import fr.pau.univ.meetballs.dao.interfaces.IRestaurantDao;
 import fr.pau.univ.meetballs.exception.DaoException;
-import fr.pau.univ.meetballs.model.Diet;
+import fr.pau.univ.meetballs.model.Restaurant;
 
-public class DietDao implements IDietDao{
+public class RestaurantDao implements IRestaurantDao{
 	
 	private final DaoBddHelper bdd;
-
+	
 	/**
 	 * Le constructeur de notre classe.
 	 * Essaye de récupérer une instance de la classe DaoBddHelper.
 	 * 
 	 * @throws DaoException
 	 */
-	public DietDao() throws DaoException {
+	public RestaurantDao() throws DaoException {
 		this.bdd = DaoBddHelper.getInstance();
 	}
 
 	@Override
-	public Diet getDietById(int id) throws DaoException {
+	public Restaurant getRestaurantById(int id) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Diet createDiet(Diet d, boolean useTransac) throws DaoException {
+	public Restaurant createRestaurant(Restaurant r, boolean useTransac) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Diet updateDiet(Diet d, boolean useTransac) throws DaoException {
+	public Restaurant updateRestaurant(Restaurant r, boolean useTransac) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteDiet(Diet d, boolean useTransac) throws DaoException {
+	public void deleteRestaurant(Restaurant r, boolean useTransac) throws DaoException {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }
