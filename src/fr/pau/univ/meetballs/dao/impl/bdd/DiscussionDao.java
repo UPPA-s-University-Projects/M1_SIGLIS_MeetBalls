@@ -5,7 +5,7 @@ import java.util.List;
 import fr.pau.univ.meetballs.dao.interfaces.IDiscussionDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Discussion;
-import fr.pau.univ.meetballs.model.Message;
+import fr.pau.univ.meetballs.model.Msg;
 import fr.pau.univ.meetballs.model.User;
 
 public class DiscussionDao implements IDiscussionDao{
@@ -35,7 +35,7 @@ public class DiscussionDao implements IDiscussionDao{
 	}
 
 	@Override
-	public Discussion getDiscussionByMessage(Message m) throws DaoException {
+	public Discussion getDiscussionByMessage(Msg m) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

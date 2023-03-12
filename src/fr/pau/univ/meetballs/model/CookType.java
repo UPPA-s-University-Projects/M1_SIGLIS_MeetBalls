@@ -6,10 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="CookType")
+@NamedQueries({
+	@NamedQuery(name = "CookType.findById", query = "SELECT ct FROM CookType ct WHERE ct.id = :id"),
+})
 public class CookType {
 	private int id;
 	private String designation;

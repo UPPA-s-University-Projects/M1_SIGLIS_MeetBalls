@@ -11,11 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Dish")
+@NamedQueries({
+	@NamedQuery(name = "Dish.findById", query = "SELECT d FROM Dish d WHERE d.id = :id"),
+	@NamedQuery(name = "Dish.findByCookType", query = "SELECT d FROM Dish d WHERE d.typeOfDish IN(ANY(SELECT ct FROM CookType ct WHERE ct.id = :id))"),
+})
 public class Dish {
 	private int id;
 	private String nom;

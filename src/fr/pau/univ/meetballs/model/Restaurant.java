@@ -10,12 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Restaurant")
+@NamedQueries({
+	@NamedQuery(name = "Restaurant.findById", query = "SELECT r FROM Restaurant r WHERE r.id = :id"),
+	@NamedQuery(name = "Restaurant.findByCookType", query = "SELECT r FROM Restaurant r WHERE r.cookTypee = ANY (SELECT ct FROM CookType ct WHERE ct.id = :id)"),
+})
 public class Restaurant {
 	//Attributs
 	private int id;

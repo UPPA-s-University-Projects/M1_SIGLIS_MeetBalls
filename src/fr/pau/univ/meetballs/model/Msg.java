@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,11 +20,17 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name="SimpleMsg")
-public class Message {
+@Table(name="Msg")
+@NamedQueries({
+	@NamedQuery(name = "Msg.findById", query = "SELECT m FROM Message m WHERE m.id = :id"),
+	@NamedQuery(name = "Msg.findByDiscussion", query = "SELECT m FROM Message m WHERE m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :id)"),
+	@NamedQuery(name = "Msg.findByUser", query = "SELECT m FROM Message m WHERE m.sender = ANY (SELECT u FROM User u WHERE u.id = :id)"),
+	@NamedQuery(name = "Msg.findByUserInDiscussion", query = "SELECT m FROM Message m WHERE (m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :discussionId)) AND (m.discussion = ANY ( SELECT u FROM User u WHERE u.id = :userId))"),
+})
+public class Msg {
 	
 	private int id;
-	private Discussion discussionId;
+	private Discussion discussion;
 	private User sender;
 	private Date msgStamp;
 	private String msg;
@@ -34,7 +42,7 @@ public class Message {
 	 * @param msgStamp
 	 * @param msg
 	 */
-	public Message(int id, Discussion discussionId, User sender, Date msgStamp, String msg) {
+	public Msg(int id, Discussion discussionId, User sender, Date msgStamp, String msg) {
 		super();
 		this.id = id;
 		this.discussionId = discussionId;
@@ -43,7 +51,7 @@ public class Message {
 		this.msg = msg;
 	}
 	
-	public Message() {}
+	public Msg() {}
 	
 	/**
 	 * @return the id

@@ -7,7 +7,7 @@
 		<class>fr.pau.univ.meetballs.model.Dish</class>
 		<class>fr.pau.univ.meetballs.model.User</class>
 		<class>fr.pau.univ.meetballs.model.Discussion</class>
-		<class>fr.pau.univ.meetballs.model.Message</class>
+		<class>fr.pau.univ.meetballs.model.Msg</class>
 		<class>fr.pau.univ.meetballs.model.Restaurant</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

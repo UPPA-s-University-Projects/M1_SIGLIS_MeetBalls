@@ -1,20 +1,34 @@
 package fr.pau.univ.meetballs.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Discussion")
+@NamedQueries({
+	@NamedQuery(name = "Discussion.findById", query = "SELECT d FROM Discussion d WHERE d.id = :id"),
+	@NamedQuery(name = "Discussion.findByMessage", query = "SELECT d FROM Discussion d WHERE d.msg IN(ANY( SELECT m FROM Message m WHERE m.id = :id))"),
+	@NamedQuery(name = "Discussion.findByUser", query = "SELECT d FROM Discussion d WHERE d.person1 IN(ANY ( SELECT u FROM User u WHERE u.id = :id)) OR d.person2 IN(ANY ( SELECT u FROM User u WHERE u.id = :id))"), //TODO : Optimize this query
+})
 public class Discussion {
 
 	private int id;
 	private User person1, person2;
+	private List<Msg> msg;
+	
 	/**
 	 * @param id
 	 * @param person1
@@ -73,6 +87,40 @@ public class Discussion {
 	public void setPerson2(User person2) {
 		this.person2 = person2;
 	}
+
+	/**
+	 * @return the msg
+	 */
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "fk_messages", referencedColumnName = "id")
+	public List<Msg> getMsg() {
+		return msg;
+	}
+
+	/**
+	 * @param msg the msg to set
+	 */
+	public void setMsg(List<Msg> msg) {
+		this.msg = msg;
+	}
+	
+	/**
+	 * @param m : The message to add to the discussion
+	 * @return the message added to the discussion
+	 */
+	public Msg addMsgToDiscussion(Msg m) {
+		this.msg.add(m);
+		return m;
+	}
+	
+	/**
+	 * @param m : The message to remove
+	 */
+	public void removeMsgFromDiscussion(Msg m ) {
+		this.msg.remove(m);
+	}
+	
+	
 	
 	
 }

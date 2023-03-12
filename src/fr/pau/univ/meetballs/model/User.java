@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,7 +23,13 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="Usr")
+@Table(name="User")
+@NamedQueries({
+	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+	@NamedQuery(name = "User.findByFavCookType", query = "SELECT u FROM User u WHERE u.favCookType IN(ANY(SELECT ct FROM CookTyp ct WHERE ct.id = :id))"),
+	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.likedUsers IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
+	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.matched IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
+})
 public class User<T> {
 	//Nos attributs pour nos utilisateurs
 	private int id;
