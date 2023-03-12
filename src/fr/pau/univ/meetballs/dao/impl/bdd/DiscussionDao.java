@@ -7,7 +7,9 @@ import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Discussion;
 import fr.pau.univ.meetballs.model.Msg;
 import fr.pau.univ.meetballs.model.User;
+import jakarta.ws.rs.Path;
 
+@Path("/discussion")
 public class DiscussionDao implements IDiscussionDao{
 
 	private final DaoBddHelper bdd;

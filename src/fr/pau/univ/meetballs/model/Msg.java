@@ -22,10 +22,12 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="Msg")
 @NamedQueries({
-	@NamedQuery(name = "Msg.findById", query = "SELECT m FROM Message m WHERE m.id = :id"),
-	@NamedQuery(name = "Msg.findByDiscussion", query = "SELECT m FROM Message m WHERE m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :id)"),
-	@NamedQuery(name = "Msg.findByUser", query = "SELECT m FROM Message m WHERE m.sender = ANY (SELECT u FROM User u WHERE u.id = :id)"),
-	@NamedQuery(name = "Msg.findByUserInDiscussion", query = "SELECT m FROM Message m WHERE (m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :discussionId)) AND (m.discussion = ANY ( SELECT u FROM User u WHERE u.id = :userId))"),
+	@NamedQuery(name = "Msg.findById", query = "SELECT m FROM Msg m WHERE m.id = :id"),
+	//TODO: redo all these queries! See note below for more inforamtion!
+	//@NamedQuery(name = "Msg.findByDiscussion", query = "SELECT m FROM Msg m WHERE m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :id)"),
+	//@NamedQuery(name = "Msg.findByUser", query = "SELECT m FROM Msg m WHERE m.sender = ANY (SELECT u FROM User u WHERE u.id = :id)"),
+	//@NamedQuery(name = "Msg.findByUserInDiscussion", query = "SELECT m FROM Msg m WHERE (m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :discussionId)) AND (m.discussion = ANY ( SELECT u FROM User u WHERE u.id = :userId))"), //TODO : redo this query
+	//m.discussion => m.id and use of IN(:discussionId = (SELECT d FROM ...)
 })
 public class Msg {
 	
@@ -42,10 +44,10 @@ public class Msg {
 	 * @param msgStamp
 	 * @param msg
 	 */
-	public Msg(int id, Discussion discussionId, User sender, Date msgStamp, String msg) {
+	public Msg(int id, Discussion discussion, User sender, Date msgStamp, String msg) {
 		super();
 		this.id = id;
-		this.discussionId = discussionId;
+		this.discussion = discussion;
 		this.sender = sender;
 		this.msgStamp = msgStamp;
 		this.msg = msg;
@@ -75,13 +77,13 @@ public class Msg {
 	@OneToOne(optional=false)
 	@JoinColumn(name = "fk_id_discussion", referencedColumnName = "id")
 	public Discussion getDiscussionId() {
-		return discussionId;
+		return discussion;
 	}
 	/**
 	 * @param discussionId the discussionId to set
 	 */
 	public void setDiscussionId(Discussion discussionId) {
-		this.discussionId = discussionId;
+		this.discussion = discussionId;
 	}
 	/**
 	 * @param idUsr1 the idUsr1 to set

@@ -3,7 +3,9 @@ package fr.pau.univ.meetballs.dao.impl.bdd;
 import fr.pau.univ.meetballs.dao.interfaces.IRestaurantDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Restaurant;
+import jakarta.ws.rs.Path;
 
+@Path("/restaurants")
 public class RestaurantDao implements IRestaurantDao{
 	
 	private final DaoBddHelper bdd;

@@ -27,8 +27,9 @@ import javax.persistence.Transient;
 @NamedQueries({
 	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
 	@NamedQuery(name = "User.findByFavCookType", query = "SELECT u FROM User u WHERE u.favCookType IN(ANY(SELECT ct FROM CookTyp ct WHERE ct.id = :id))"),
-	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.likedUsers IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
-	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.matched IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
+	//TODO: Redo this query
+	//@NamedQuery(name = "User.findByLikedUsers", query = "SELECT u FROM User u WHERE u.likedUsers IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
+	@NamedQuery(name = "User.findByMatched", query = "SELECT u FROM User u WHERE u.matched IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
 })
 public class User<T> {
 	//Nos attributs pour nos utilisateurs

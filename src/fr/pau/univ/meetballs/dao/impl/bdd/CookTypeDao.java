@@ -3,7 +3,9 @@ package fr.pau.univ.meetballs.dao.impl.bdd;
 import fr.pau.univ.meetballs.dao.interfaces.ICookTypeDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.CookType;
+import jakarta.ws.rs.Path;
 
+@Path("/cookType")
 public class CookTypeDao implements ICookTypeDao{
 	
 	private final DaoBddHelper bdd;

@@ -3,7 +3,9 @@ package fr.pau.univ.meetballs.dao.impl.bdd;
 import fr.pau.univ.meetballs.dao.interfaces.IDietDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Diet;
+import jakarta.ws.rs.Path;
 
+@Path("/diet")
 public class DietDao implements IDietDao{
 	
 	private final DaoBddHelper bdd;
