@@ -8,8 +8,10 @@ import javax.persistence.TypedQuery;
 import fr.pau.univ.meetballs.dao.interfaces.ICookTypeDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.CookType;
+import jakarta.ws.rs.Path;
 import fr.pau.univ.meetballs.model.User;
 
+@Path("/cookType")
 public class CookTypeDao implements ICookTypeDao{
 	
 	private final DaoBddHelper bdd;

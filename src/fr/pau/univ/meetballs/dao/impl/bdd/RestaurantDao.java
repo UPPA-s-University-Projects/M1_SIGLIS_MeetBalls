@@ -8,8 +8,10 @@ import javax.persistence.TypedQuery;
 import fr.pau.univ.meetballs.dao.interfaces.IRestaurantDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Restaurant;
+import jakarta.ws.rs.Path;
 import fr.pau.univ.meetballs.model.User;
 
+@Path("/restaurants")
 public class RestaurantDao implements IRestaurantDao{
 	
 	private final DaoBddHelper bdd;

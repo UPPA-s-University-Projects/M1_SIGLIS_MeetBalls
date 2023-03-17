@@ -8,8 +8,10 @@ import javax.persistence.TypedQuery;
 import fr.pau.univ.meetballs.dao.interfaces.IDietDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Diet;
+import jakarta.ws.rs.Path;
 import fr.pau.univ.meetballs.model.User;
 
+@Path("/diet")
 public class DietDao implements IDietDao{
 	
 	private final DaoBddHelper bdd;

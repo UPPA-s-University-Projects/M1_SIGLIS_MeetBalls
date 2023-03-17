@@ -18,3 +18,4 @@ public interface ISimpleMsgDao {
 	public Message updateMessage(Message m, final boolean useTransac)throws DaoException;
 	public void deleteMessage(Message m, final boolean useTransac)throws DaoException;
 }
+
