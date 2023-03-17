@@ -1,8 +1,14 @@
 package fr.pau.univ.meetballs.dao.impl.bdd;
 
+import java.util.List;
+
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+
 import fr.pau.univ.meetballs.dao.interfaces.ICookTypeDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.CookType;
+import fr.pau.univ.meetballs.model.User;
 
 public class CookTypeDao implements ICookTypeDao{
 	
@@ -20,25 +26,69 @@ public class CookTypeDao implements ICookTypeDao{
 
 	@Override
 	public CookType getCookTypeById(int id) throws DaoException {
-		// TODO Auto-generated method stub
+		final TypedQuery<CookType> query = this.bdd.getEm().createNamedQuery("CookType.findById", CookType.class);
+		query.setParameter("id", id);
+		
+		
+		final List<CookType> ret = query.getResultList();
+		
+		
+		if (ret.size() > 0) {
+			return ret.get(0);
+		}
 		return null;
 	}
 
 	@Override
 	public CookType createCookType(CookType ct, boolean useTransac) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().persist(ct);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+			return ct;
+		} catch (final PersistenceException e) {
+			this.bdd.rollbackTransaction();
+			throw new DaoException("Can't create the new object", e);
+		}
 	}
 
 	@Override
 	public CookType updateCookType(CookType ct, boolean useTransac) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().merge(ct);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+			return ct;
+		} catch (final PersistenceException e) {
+			this.bdd.rollbackTransaction();
+			throw new DaoException("Can't update the object", e);
+		}
 	}
 
 	@Override
 	public void deleteCookType(CookType ct, boolean useTransac) throws DaoException {
-		// TODO Auto-generated method stub
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().remove(ct);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+		} catch (final PersistenceException e) {
+			if (useTransac) {
+				this.bdd.rollbackTransaction();
+			}
+			throw new DaoException("Can't delete the object", e);
+		}
 		
 	}
 	

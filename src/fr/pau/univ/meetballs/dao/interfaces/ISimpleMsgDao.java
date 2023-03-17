@@ -14,7 +14,7 @@ public interface ISimpleMsgDao {
 	public <T> List<Message> getMessagesByUser(User<T> u) throws DaoException;
 	public <T> List<Message> getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException;
 	
-	public Message createMessage(Message m, final boolean useTransac);
-	public Message updateMessage(Message m, final boolean useTransac);
-	public void deleteMessage(Message m, final boolean useTransac);
+	public Message createMessage(Message m, final boolean useTransac) throws DaoException;
+	public Message updateMessage(Message m, final boolean useTransac)throws DaoException;
+	public void deleteMessage(Message m, final boolean useTransac)throws DaoException;
 }

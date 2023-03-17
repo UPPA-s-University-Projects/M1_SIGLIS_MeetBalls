@@ -17,5 +17,5 @@ public interface IUserDao<T> {
 	//Methods to send data
 	User<T> createUser(User<T> u, final boolean useTransac) throws DaoException;
 	User<T> updateUser(User<T> u, final boolean useTransac) throws DaoException;
-	User<T> deleteUser(User<T> u, final boolean useTransac) throws DaoException;
+	void deleteUser(User<T> u, final boolean useTransac) throws DaoException;
 }

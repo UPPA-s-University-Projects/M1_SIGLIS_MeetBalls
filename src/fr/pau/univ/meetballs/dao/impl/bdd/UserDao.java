@@ -2,6 +2,7 @@ package fr.pau.univ.meetballs.dao.impl.bdd;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import fr.pau.univ.meetballs.dao.interfaces.IUserDao;
@@ -23,7 +24,7 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public User getUserById(int id) throws DaoException {
-		final TypedQuery<User> query = this.bdd.getEm().createNamedQuery("Usr.findById", User.class);
+		final TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findById", User.class);
 		query.setParameter("id", id);
 		
 		
@@ -56,20 +57,56 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public User createUser(User u, boolean useTransac) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().persist(u);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+			return u;
+		} catch (final PersistenceException e) {
+			this.bdd.rollbackTransaction();
+			throw new DaoException("Can't create the new object", e);
+		}
 	}
 
 	@Override
 	public User updateUser(User u, boolean useTransac) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().merge(u);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+			return u;
+		} catch (final PersistenceException e) {
+			this.bdd.rollbackTransaction();
+			throw new DaoException("Can't update the object", e);
+		}
 	}
 
 	@Override
-	public User deleteUser(User u, boolean useTransac) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUser(User u, boolean useTransac) throws DaoException {
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().remove(u);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+		} catch (final PersistenceException e) {
+			if (useTransac) {
+				this.bdd.rollbackTransaction();
+			}
+			throw new DaoException("Can't delete the object", e);
+		}
 	}
 
+	
+	
 }
