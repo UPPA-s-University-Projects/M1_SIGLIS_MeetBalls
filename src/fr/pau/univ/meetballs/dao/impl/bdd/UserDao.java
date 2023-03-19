@@ -50,12 +50,24 @@ public class UserDao implements IUserDao {
 	@Override
 	public List getUsersByMatchedUser(User u) throws DaoException {
 		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findByMatched", User.class);
+		query.setParameter("matchedId", u.getId());
 		return query.getResultList();
 	}
 
 	@Override
 	public List getUsersByLikedUsers(User u) throws DaoException {
 		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findByMatched", User.class);
+		query.setParameter("likedId", u.getId());
+		
+		return query.getResultList();
+	}
+	
+	@Override
+	public List getToMatchUser(User u, CookType ct) throws DaoException {
+		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findNewUserToMatch", User.class);
+		query.setParameter("ctId", ct.getId());
+		query.setParameter("u", u.getId());
+		
 		return query.getResultList();
 	}
 
@@ -110,7 +122,5 @@ public class UserDao implements IUserDao {
 			throw new DaoException("Can't delete the object", e);
 		}
 	}
-
-	
 	
 }

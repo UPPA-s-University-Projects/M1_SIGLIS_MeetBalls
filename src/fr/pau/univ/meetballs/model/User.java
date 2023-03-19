@@ -36,9 +36,9 @@ import javax.persistence.Transient;
 	//Find all users by their favorite cooktype which are not already liked, disliked or matched (get all new potential likeable users)
 	//This query is really important to filter as many users as possible and only return compatible user
 	@NamedQuery(name = "User.findNewUserToMatch", query = "SELECT u FROM User u WHERE :ctId = ANY (SELECT ct.id FROM u.favCookType ct) AND"
-			+ " :likedId = ANY(SELECT uLiked FROM u.likedUsers uLiked) AND" 
-			+ " :matchedId = ANY(SELECT uMatched.id FROM u.matched uMatched) AND"
-			+ " :dislikedId = ANY(SELECT uDisliked FROM u.dislikedUser uDisliked)"),
+			+ " :u = ANY(SELECT uLiked FROM u.likedUsers uLiked) AND" 
+			+ " :u = ANY(SELECT uMatched.id FROM u.matched uMatched) AND"
+			+ " :u = ANY(SELECT uDisliked FROM u.dislikedUser uDisliked)"),
 //	@NamedQuery(name = "User.findPotentialMatches", query = "SELECT DISTINCT * FROM User AS other_usr WHERE other_usr.id IN ("
 //			+ "SELECT other_usr_cooktype.id_usr"
 //			+ "FROM usrFavCookType AS current_usr_cooktype"
