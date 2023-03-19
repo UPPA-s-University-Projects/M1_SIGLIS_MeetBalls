@@ -45,12 +45,8 @@ public class RestaurantDao implements IRestaurantDao{
 	@Override
 	public List<Restaurant> getRestaurantByCookType(CookType ct) throws DaoException {
 		final TypedQuery<Restaurant> query = this.bdd.getEm().createNamedQuery("Restaurant.findByCookType", Restaurant.class);
-		query.setParameter("cookTypeId", ct.getId());
-		
-		
-		final List<Restaurant> ret = query.getResultList();
-		
-		return r;
+		query.setParameter("cookTypeId", ct.getId());		
+		return query.getResultList();
 	}
 
 	@Override

@@ -61,6 +61,21 @@ public class MsgDao implements IMsgDao {
 		
 		return ret;
 	}
+	
+	@Override
+	public Msg getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException {
+		final TypedQuery<Msg> query = this.bdd.getEm().createNamedQuery("Msg.findByUserInDiscussion", Msg.class);
+		query.setParameter("senderId", u.getId());
+		query.setParameter("discussionId", d.getId());
+		
+		final List<Msg> ret = query.getResultList();
+		
+		
+		if (ret.size() > 0) {
+			return ret.get(0);
+		}
+		return null;
+	}
 
 	@Override
 	public Msg createMessage(Msg m, boolean useTransac) throws DaoException {
@@ -114,4 +129,6 @@ public class MsgDao implements IMsgDao {
 		}
 		
 	}
+
+	
 }

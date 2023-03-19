@@ -9,7 +9,6 @@ import fr.pau.univ.meetballs.dao.interfaces.IUserDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.CookType;
 import fr.pau.univ.meetballs.model.User;
-import fr.pau.univ.series.model.Episode;
 import jakarta.ws.rs.Path;
 
 @Path("/user")

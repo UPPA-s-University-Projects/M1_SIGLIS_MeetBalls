@@ -12,7 +12,7 @@ public interface IMsgDao {
 	public Msg getMesageById(int id) throws DaoException;
 	public List<Msg> getMessagesByDiscussion(Discussion d) throws DaoException;
 	public <T> List<Msg> getMessagesByUser(User<T> u) throws DaoException;
-	public <T> List<Msg> getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException;
+	public <T> Msg getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException;
 	
 	public Msg createMessage(Msg m, final boolean useTransac) throws DaoException;
 	public Msg updateMessage(Msg m, final boolean useTransac) throws DaoException;
