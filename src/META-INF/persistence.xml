@@ -12,10 +12,10 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/meetballs"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://meetballs.cxxlov0h1saz.eu-west-3.rds.amazonaws.com:8086/meetballs"/>
 			<!-- Attention de bien changer votre nom d'utilisateur et mot de passe ici par ceux choisis dans PGAdmin!  -->
-			<property name="javax.persistence.jdbc.user" value="postgres"/>
-			<property name="javax.persistence.jdbc.password" value="40c275410B"/>
+			<property name="javax.persistence.jdbc.user" value="meetballsdbadmin"/>
+			<property name="javax.persistence.jdbc.password" value="Edf9p3WQ"/>
 			<property name="eclipselink.logging.level" value="FINE"/>
 		</properties>
 	</persistence-unit>
