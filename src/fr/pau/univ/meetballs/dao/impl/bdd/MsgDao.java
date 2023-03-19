@@ -2,6 +2,9 @@ package fr.pau.univ.meetballs.dao.impl.bdd;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+
 import fr.pau.univ.meetballs.dao.interfaces.IMsgDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.Discussion;
@@ -24,43 +27,91 @@ public class MsgDao implements IMsgDao {
 
 	@Override
 	public Msg getMesageById(int id) throws DaoException {
-		// TODO Auto-generated method stub
+		final TypedQuery<Msg> query = this.bdd.getEm().createNamedQuery("Msg.findById", Msg.class);
+		query.setParameter("id", id);
+		
+		
+		final List<Msg> ret = query.getResultList();
+		
+		
+		if (ret.size() > 0) {
+			return ret.get(0);
+		}
 		return null;
 	}
 
 	@Override
 	public List<Msg> getMessagesByDiscussion(Discussion d) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		final TypedQuery<Msg> query = this.bdd.getEm().createNamedQuery("Msg.findById", Msg.class);
+		query.setParameter(":discussionId", d.getId());
+		
+		
+		final List<Msg> ret = query.getResultList();
+		
+		return ret;
 	}
 
 	@Override
 	public <T> List<Msg> getMessagesByUser(User<T> u) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		final TypedQuery<Msg> query = this.bdd.getEm().createNamedQuery("Msg.findById", Msg.class);
+		query.setParameter(":senderId", u.getId());
+		
+		
+		final List<Msg> ret = query.getResultList();
+		
+		return ret;
 	}
 
 	@Override
-	public <T> List<Msg> getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public Msg createMessage(Msg m, boolean useTransac) throws DaoException {
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().persist(m);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+			return m;
+		} catch (final PersistenceException e) {
+			this.bdd.rollbackTransaction();
+			throw new DaoException("Can't create the new object", e);
+		}
 	}
 
 	@Override
-	public Msg createMessage(Msg m, boolean useTransac) {
-		// TODO Auto-generated method stub
-		return null;
+	public Msg updateMessage(Msg m, boolean useTransac) throws DaoException {
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().merge(m);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+			return m;
+		} catch (final PersistenceException e) {
+			this.bdd.rollbackTransaction();
+			throw new DaoException("Can't update the object", e);
+		}
 	}
 
 	@Override
-	public Msg updateMessage(Msg m, boolean useTransac) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteMessage(Msg m, boolean useTransac) {
-		// TODO Auto-generated method stub
+	public void deleteMessage(Msg m, boolean useTransac)  throws DaoException {
+		try {
+			if (useTransac) {
+				this.bdd.beginTransaction();
+			}
+			this.bdd.getEm().remove(m);
+			if (useTransac) {
+				this.bdd.commitTransaction();
+			}
+		} catch (final PersistenceException e) {
+			if (useTransac) {
+				this.bdd.rollbackTransaction();
+			}
+			throw new DaoException("Can't delete the object", e);
+		}
 		
 	}
 }

@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Table(name="Diet")
 @NamedQueries({
 	@NamedQuery(name = "Diet.findById", query = "SELECT d FROM Diet d WHERE d.id = :id"),
+	@NamedQuery(name = "Diet.findAll", query = "SELECT d FROM Diet d")
 })
 public class Diet {
 	private int id;

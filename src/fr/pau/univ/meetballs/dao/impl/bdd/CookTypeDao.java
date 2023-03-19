@@ -40,6 +40,15 @@ public class CookTypeDao implements ICookTypeDao{
 		}
 		return null;
 	}
+	
+	@Override
+	public List<CookType> getAllCookTypes() throws DaoException {
+		final TypedQuery<CookType> query = this.bdd.getEm().createNamedQuery("CookType.findAll", CookType.class);
+		
+		final List<CookType> ret = query.getResultList();
+		
+		return ret;
+	}
 
 	@Override
 	public CookType createCookType(CookType ct, boolean useTransac) throws DaoException {

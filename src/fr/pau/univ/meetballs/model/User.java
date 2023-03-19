@@ -25,11 +25,31 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="User")
 @NamedQueries({
+	//Find a user by its ID in our DB.
 	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-	@NamedQuery(name = "User.findByFavCookType", query = "SELECT u FROM User u WHERE u.favCookType IN(ANY(SELECT ct FROM CookTyp ct WHERE ct.id = :id))"),
-	//TODO: Redo this query
-	//@NamedQuery(name = "User.findByLikedUsers", query = "SELECT u FROM User u WHERE u.likedUsers IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
-	@NamedQuery(name = "User.findByMatched", query = "SELECT u FROM User u WHERE u.matched IN(ANY(SELECT u FROM User u WHERE u.id = :id))"),
+	//Find a user by its favorite cook type (
+	@NamedQuery(name = "User.findByFavCookType", query = "SELECT u FROM User u WHERE :ctId = ANY (SELECT ct.id FROM u.favCookType ct)"),
+	//Find a user by its liked user
+	@NamedQuery(name = "User.findByLikedUsers", query = "SELECT u FROM User u WHERE :likedId = ANY(SELECT uLiked FROM u.likedUsers uLiked)"),
+	//Find a user by its matched user.
+	@NamedQuery(name = "User.findByMatched", query = "SELECT u FROM User u WHERE :matchedId = ANY(SELECT uMatched.id FROM u.matched uMatched)"),
+	//Find all users by their favorite cooktype which are not already liked, disliked or matched (get all new potential likeable users)
+	//This query is really important to filter as many users as possible and only return compatible user
+	@NamedQuery(name = "User.findNewUserToMatch", query = "SELECT u FROM User u WHERE :ctId = ANY (SELECT ct.id FROM u.favCookType ct) AND"
+			+ " :likedId = ANY(SELECT uLiked FROM u.likedUsers uLiked) AND" 
+			+ " :matchedId = ANY(SELECT uMatched.id FROM u.matched uMatched) AND"
+			+ " :dislikedId = ANY(SELECT uDisliked FROM u.dislikedUser uDisliked)"),
+//	@NamedQuery(name = "User.findPotentialMatches", query = "SELECT DISTINCT * FROM User AS other_usr WHERE other_usr.id IN ("
+//			+ "SELECT other_usr_cooktype.id_usr"
+//			+ "FROM usrFavCookType AS current_usr_cooktype"
+//			+ "JOIN usrFavCookType AS other_usr_cooktype ON current_usr_cooktype.id_type = other_usr_cooktype.id_type"
+//			+ "WHERE current_usr_cooktype.id_usr = :uId)"
+//			+ "AND NOT FIND_IN_SET(other_usr.id, (SELECT liked_users FROM Usr WHERE id = :uId))"
+//			+ "AND NOT FIND_IN_SET(other_usr.id, (SELECT disliked_users FROM Usr WHERE id = :uId))"
+//			+ "AND NOT FIND_IN_SET(other_usr.id, (SELECT matched_users FROM Usr WHERE id = :uId))"
+//			+ "AND NOT FIND_IN_SET(:uId, (SELECT matched_users FROM Usr WHERE id = other_usr.id))"
+//	    )
+
 })
 public class User<T> {
 	//Nos attributs pour nos utilisateurs
@@ -50,7 +70,7 @@ public class User<T> {
 	//Un utilisateur a plusieurs type de cuisine favorie.
 	private List<CookType> favCookType;
 	
-	private List<User> likedUsers, dislikedUser, toMatch, matched;
+	private List<User> likedUsers, dislikedUser, matched;
 	private float tauxCuisson;
 	
 	

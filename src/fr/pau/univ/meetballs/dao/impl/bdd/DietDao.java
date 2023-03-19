@@ -42,6 +42,15 @@ public class DietDao implements IDietDao{
 	}
 
 	@Override
+	public List<Diet> getAllDiets() throws DaoException {
+		final TypedQuery<Diet> query = this.bdd.getEm().createNamedQuery("Diet.findAll", Diet.class);		
+		
+		final List<Diet> ret = query.getResultList();
+		
+		return ret;
+	}
+	
+	@Override
 	public Diet createDiet(Diet d, boolean useTransac) throws DaoException {
 		try {
 			if (useTransac) {

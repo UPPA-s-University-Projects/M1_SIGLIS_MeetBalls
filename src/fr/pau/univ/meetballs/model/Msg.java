@@ -23,11 +23,10 @@ import javax.persistence.TemporalType;
 @Table(name="Msg")
 @NamedQueries({
 	@NamedQuery(name = "Msg.findById", query = "SELECT m FROM Msg m WHERE m.id = :id"),
-	//TODO: redo all these queries! See note below for more inforamtion!
-	//@NamedQuery(name = "Msg.findByDiscussion", query = "SELECT m FROM Msg m WHERE m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :id)"),
-	//@NamedQuery(name = "Msg.findByUser", query = "SELECT m FROM Msg m WHERE m.sender = ANY (SELECT u FROM User u WHERE u.id = :id)"),
-	//@NamedQuery(name = "Msg.findByUserInDiscussion", query = "SELECT m FROM Msg m WHERE (m.discussion = ANY ( SELECT d FROM Discussion d WHERE d.id = :discussionId)) AND (m.discussion = ANY ( SELECT u FROM User u WHERE u.id = :userId))"), //TODO : redo this query
-	//m.discussion => m.id and use of IN(:discussionId = (SELECT d FROM ...)
+	@NamedQuery(name = "Msg.findByDiscussion", query = "SELECT m FROM Msg m WHERE :discussionId = ANY(SELECT d.id FROM m.discussion d)"),
+	@NamedQuery(name = "Msg.findByUser", query = "SELECT m FROM Msg m WHERE :senderId = ANY (SELECT u.id FROM m.sender u)"),
+	@NamedQuery(name = "Msg.findByUserInDiscussion", query = "SELECT m FROM Msg m WHERE :senderId = ANY (SELECT u.id FROM m.sender u) AND"
+			+ " :discussionId = ANY(SELECT d.id FROM m.discussion d)")
 })
 public class Msg {
 	

@@ -50,14 +50,14 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public List getUsersByMatchedUser(User u) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findByMatched", User.class);
+		return query.getResultList();
 	}
 
 	@Override
-	public List getUsersByMatchedUsers(User u) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public List getUsersByLikedUsers(User u) throws DaoException {
+		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findByMatched", User.class);
+		return query.getResultList();
 	}
 
 	@Override

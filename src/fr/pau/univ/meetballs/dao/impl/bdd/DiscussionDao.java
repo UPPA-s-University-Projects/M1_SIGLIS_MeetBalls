@@ -44,13 +44,27 @@ public class DiscussionDao implements IDiscussionDao{
 
 	@Override
 	public <T> List<Discussion> getDiscussionsByUser(User<T> u) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		final TypedQuery<Discussion> query = this.bdd.getEm().createNamedQuery("Discussion.findByUser", Discussion.class);
+		query.setParameter("userId", u.getId());
+		
+		
+		final List<Discussion> ret = query.getResultList();
+	
+		return ret;
 	}
 
 	@Override
 	public Discussion getDiscussionByMessage(Msg m) throws DaoException {
-		// TODO Auto-generated method stub
+		final TypedQuery<Discussion> query = this.bdd.getEm().createNamedQuery("Discussion.findByMessage", Discussion.class);
+		query.setParameter("msgId", m.getId());
+		
+		
+		final List<Discussion> ret = query.getResultList();
+		
+		
+		if (ret.size() > 0) {
+			return ret.get(0);
+		}
 		return null;
 	}
 

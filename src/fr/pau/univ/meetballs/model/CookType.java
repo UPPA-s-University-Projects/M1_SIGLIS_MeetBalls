@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Table(name="CookType")
 @NamedQueries({
 	@NamedQuery(name = "CookType.findById", query = "SELECT ct FROM CookType ct WHERE ct.id = :id"),
+	@NamedQuery(name = "CookType.findAll", query="SELECT ct FROM CookType ct")
 })
 public class CookType {
 	private int id;

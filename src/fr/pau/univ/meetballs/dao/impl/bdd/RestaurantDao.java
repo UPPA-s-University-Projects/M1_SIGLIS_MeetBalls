@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import fr.pau.univ.meetballs.dao.interfaces.IRestaurantDao;
 import fr.pau.univ.meetballs.exception.DaoException;
+import fr.pau.univ.meetballs.model.CookType;
 import fr.pau.univ.meetballs.model.Restaurant;
 import jakarta.ws.rs.Path;
 import fr.pau.univ.meetballs.model.User;
@@ -39,6 +40,17 @@ public class RestaurantDao implements IRestaurantDao{
 			return ret.get(0);
 		}
 		return null;
+	}
+	
+	@Override
+	public List<Restaurant> getRestaurantByCookType(CookType ct) throws DaoException {
+		final TypedQuery<Restaurant> query = this.bdd.getEm().createNamedQuery("Restaurant.findByCookType", Restaurant.class);
+		query.setParameter("cookTypeId", ct.getId());
+		
+		
+		final List<Restaurant> ret = query.getResultList();
+		
+		return r;
 	}
 
 	@Override

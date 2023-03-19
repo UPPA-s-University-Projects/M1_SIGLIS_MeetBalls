@@ -11,7 +11,7 @@ public interface IUserDao<T> {
 	public User<T> getUserById(int id) throws DaoException;
 	public List<User<T>> getUsersByFavCookType(List<CookType> ct) throws DaoException;
 	public List<User<T>> getUsersByMatchedUser(User<T> u) throws DaoException;
-	public List<User<T>> getUsersByMatchedUsers(User<T> u) throws DaoException;
+	public List<User<T>> getUsersByLikedUsers(User<T> u) throws DaoException;
 	//public List<User<T>> getUsersByIdentity(String identity) throws DaoException;
 	
 	//Methods to send data
