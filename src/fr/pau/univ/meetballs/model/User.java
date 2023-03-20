@@ -125,7 +125,7 @@ public class User<T> {
 	 */
 	public User(int id, String nom, String prenom, String pwd, String pp, Date dob, boolean sex, String bio, String loc,
 			int perimetre, boolean desert, List<Diet> diets, List<CookType> favCookType, List<User> likedUsers,
-			List<User> dislikedUser, List<User> toMatch) {
+			List<User> dislikedUser) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -142,20 +142,18 @@ public class User<T> {
 		this.favCookType = favCookType;
 		this.likedUsers = likedUsers;
 		this.dislikedUser = dislikedUser;
-		this.toMatch = toMatch;
 	}
 	
 	
 	
 	public User(boolean desert, List<Diet> diets, List<CookType> favCookType,
-			List<User> likedUsers, List<User> dislikedUser, List<User> toMatch, float tauxCuisson) {
+			List<User> likedUsers, List<User> dislikedUser, float tauxCuisson) {
 		super();
 		this.desert = desert;
 		this.diets = diets;
 		this.favCookType = favCookType;
 		this.likedUsers = likedUsers;
 		this.dislikedUser = dislikedUser;
-		this.toMatch = toMatch;
 		this.tauxCuisson = tauxCuisson;
 	}
 
@@ -496,14 +494,6 @@ public class User<T> {
 	 */
 	public void setTauxCuisson(float tauxCuisson) {
 		this.tauxCuisson = tauxCuisson;
-	}
-
-	public List<User> getToMatch() {
-		return toMatch;
-	}
-
-	public void setToMatch(List<User> toMatch) {
-		this.toMatch = toMatch;
 	}
 
 	public List<User> getMatched() {
