@@ -39,6 +39,7 @@ import javax.persistence.Transient;
 			+ " :likedId = ANY(SELECT uLiked FROM u.likedUsers uLiked) AND" 
 			+ " :matchedId = ANY(SELECT uMatched.id FROM u.matched uMatched) AND"
 			+ " :dislikedId = ANY(SELECT uDisliked FROM u.dislikedUser uDisliked)"),
+	@NamedQuery(name = "User.findAll", query="SELECT u FROM User u")
 //	@NamedQuery(name = "User.findPotentialMatches", query = "SELECT DISTINCT * FROM User AS other_usr WHERE other_usr.id IN ("
 //			+ "SELECT other_usr_cooktype.id_usr"
 //			+ "FROM usrFavCookType AS current_usr_cooktype"

@@ -14,6 +14,7 @@ import jakarta.ws.rs.Path;
 @Path("/user")
 public class UserDao implements IUserDao {
 	private final DaoBddHelper bdd;
+	private final User currentUser;
 
 	/**
 	 * Le constructeur de notre classe.
@@ -24,6 +25,14 @@ public class UserDao implements IUserDao {
 	public UserDao() throws DaoException {
 		this.bdd = DaoBddHelper.getInstance();
 	}
+	
+
+	@Override
+	public List getAllUsers() throws DaoException {
+		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findAll", User.class);
+		return query.getResultList();
+	}
+
 
 	@Override
 	public User getUserById(int id) throws DaoException {
@@ -110,6 +119,8 @@ public class UserDao implements IUserDao {
 			throw new DaoException("Can't delete the object", e);
 		}
 	}
+
+
 
 	
 	

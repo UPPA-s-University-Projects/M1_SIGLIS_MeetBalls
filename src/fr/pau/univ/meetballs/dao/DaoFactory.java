@@ -1,6 +1,16 @@
 package fr.pau.univ.meetballs.dao;
 
+import fr.pau.univ.meetballs.dao.impl.bdd.CookTypeDao;
+import fr.pau.univ.meetballs.dao.impl.bdd.DietDao;
+import fr.pau.univ.meetballs.dao.impl.bdd.DiscussionDao;
+import fr.pau.univ.meetballs.dao.impl.bdd.MsgDao;
+import fr.pau.univ.meetballs.dao.impl.bdd.RestaurantDao;
 import fr.pau.univ.meetballs.dao.impl.bdd.UserDao;
+import fr.pau.univ.meetballs.dao.interfaces.ICookTypeDao;
+import fr.pau.univ.meetballs.dao.interfaces.IDietDao;
+import fr.pau.univ.meetballs.dao.interfaces.IDiscussionDao;
+import fr.pau.univ.meetballs.dao.interfaces.IMsgDao;
+import fr.pau.univ.meetballs.dao.interfaces.IRestaurantDao;
 import fr.pau.univ.meetballs.dao.interfaces.IUserDao;
 import fr.pau.univ.meetballs.exception.DaoException;
 
@@ -16,6 +26,12 @@ public class DaoFactory {
 
 	private static DaoFactory instance = null;
 
+	
+	private ICookTypeDao cookTypeDao = null;
+	private IDietDao dietDao = null;
+	private IDiscussionDao discussDao = null;
+	private IMsgDao msgDao = null;
+	private IRestaurantDao restaurantDao = null;
 	private IUserDao userDao = null;
 
 	/**
@@ -53,6 +69,83 @@ public class DaoFactory {
 		}
 		return this.userDao;
 	}
+
+	/**
+	 * @return the cookTypeDao
+	 */
+	public ICookTypeDao getCookTypeDao() {
+		if (this.cookTypeDao == null) {
+			try {
+				this.cookTypeDao = new CookTypeDao();
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
+		}
+		return this.cookTypeDao;
+	}
+
+
+	/**
+	 * @return the dietDao
+	 */
+	public IDietDao getDietDao() {
+		if (this.dietDao == null) {
+			try {
+				this.dietDao = new DietDao();
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
+		}
+		return this.dietDao;
+	}
+
+
+	/**
+	 * @return the discussDao
+	 */
+	public IDiscussionDao getDiscussDao() {
+		if (this.discussDao == null) {
+			try {
+				this.discussDao = new DiscussionDao();
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
+		}
+		return this.discussDao;
+	}
+
+
+	/**
+	 * @return the msgDao
+	 */
+	public IMsgDao getMsgDao() {
+		if (this.msgDao == null) {
+			try {
+				this.msgDao = new MsgDao();
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
+		}
+		return this.msgDao;
+		}
+
+	/**
+	 * @return the restaurantDao
+	 */
+	public IRestaurantDao getRestaurantDao() {
+		if (this.restaurantDao == null) {
+			try {
+				this.restaurantDao = new RestaurantDao();
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
+		}
+		return this.restaurantDao;
+	}
+
+
+	
+	
 
 
 

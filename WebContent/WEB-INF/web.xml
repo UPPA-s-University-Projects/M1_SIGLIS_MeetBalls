@@ -3,6 +3,18 @@
   <display-name>MeetBalls</display-name>
 <!--   <welcome-file-list>
    
+   
   </welcome-file-list> -->
+  
+  <!-- Nos servlets de lécture des données (lister épisode et séries -->
+  	<!-- Notre servlet pour accéder à listerSeries -->
+	<servlet>
+		<servlet-name>testingAll</servlet-name>
+		<servlet-class>fr.pau.univ.series.servlets.testingAll</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>testingAll</servlet-name>
+		<url-pattern>/testingAll</url-pattern>
+	</servlet-mapping>
   
 </web-app>

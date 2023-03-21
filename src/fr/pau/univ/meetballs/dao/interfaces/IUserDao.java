@@ -8,6 +8,7 @@ import fr.pau.univ.meetballs.model.User;
 
 public interface IUserDao<T> {
 	//Methods to retrieve data
+	public List<T> getAllUsers() throws DaoException;
 	public User<T> getUserById(int id) throws DaoException;
 	public List<User<T>> getUsersByFavCookType(List<CookType> ct) throws DaoException;
 	public List<User<T>> getUsersByMatchedUser(User<T> u) throws DaoException;
