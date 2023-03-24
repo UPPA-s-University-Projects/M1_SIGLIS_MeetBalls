@@ -63,7 +63,7 @@ public class MsgDao implements IMsgDao {
 	}
 	
 	@Override
-	public Msg getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException {
+	public <T> Msg getMessagesByUserInDiscussion(User<T> u, Discussion d) throws DaoException {
 		final TypedQuery<Msg> query = this.bdd.getEm().createNamedQuery("Msg.findByUserInDiscussion", Msg.class);
 		query.setParameter("senderId", u.getId());
 		query.setParameter("discussionId", d.getId());
@@ -129,6 +129,5 @@ public class MsgDao implements IMsgDao {
 		}
 		
 	}
-
 	
 }

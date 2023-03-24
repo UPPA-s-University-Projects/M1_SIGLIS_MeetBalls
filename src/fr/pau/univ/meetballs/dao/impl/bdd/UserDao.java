@@ -14,7 +14,7 @@ import jakarta.ws.rs.Path;
 @Path("/user")
 public class UserDao implements IUserDao {
 	private final DaoBddHelper bdd;
-	private final User currentUser;
+	//private final User currentUser;
 
 	/**
 	 * Le constructeur de notre classe.
@@ -24,6 +24,7 @@ public class UserDao implements IUserDao {
 	 */
 	public UserDao() throws DaoException {
 		this.bdd = DaoBddHelper.getInstance();
+		
 	}
 	
 

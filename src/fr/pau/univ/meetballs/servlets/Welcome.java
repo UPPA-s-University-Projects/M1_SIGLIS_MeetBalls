@@ -1,4 +1,4 @@
-package fr.pzu.univ.meetballs.servlets;
+package fr.pau.univ.meetballs.servlets;
 
 import java.io.IOException;
 import java.rmi.ServerException;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/testingAll/")
-public class testingAll extends HttpServlet{
+@WebServlet("/index/")
+public class Welcome extends HttpServlet{
 
 	/**
 	 * Méthode qui gère les requêtes GET.
@@ -24,13 +24,8 @@ public class testingAll extends HttpServlet{
 	 */
 	@Override
 	public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServerException, IOException, ServletException {
-		try {
-			request.setAttribute("", DaoFactory.getInstance().getUserDao().getAllUsers());
-		} catch (DaoException e) {
-			request.setAttribute("erreur", e.getMessage());
-			e.printStackTrace();
-		}
-		this.getServletContext().getRequestDispatcher("/test.jsp").forward(request, response);
+		
+		this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 	
 }

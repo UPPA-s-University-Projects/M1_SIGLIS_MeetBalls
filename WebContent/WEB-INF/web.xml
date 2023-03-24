@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>MeetBalls</display-name>
-<!--   <welcome-file-list>
-   
-   
-  </welcome-file-list> -->
+	<welcome-file-list>
+   		<welcome-file>fr.pau.univ.meetballs.servlets.Welcome</welcome-file>
+  	</welcome-file-list>
   
-  <!-- Nos servlets de lécture des données (lister épisode et séries -->
-  	<!-- Notre servlet pour accéder à listerSeries -->
+  
 	<servlet>
-		<servlet-name>testingAll</servlet-name>
-		<servlet-class>fr.pau.univ.series.servlets.testingAll</servlet-class>
+		<servlet-name>TestingAll</servlet-name>
+		<servlet-class>fr.pau.univ.meetballs.servlets.TestingAll</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>testingAll</servlet-name>
+		<servlet-name>TestingAll</servlet-name>
 		<url-pattern>/testingAll</url-pattern>
+	</servlet-mapping>
+  
+  
+  	<servlet>
+		<servlet-name>Welcome</servlet-name>
+		<servlet-class>fr.pau.univ.meetballs.servlets.Welcome</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Welcome</servlet-name>
+		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
   
 </web-app>
