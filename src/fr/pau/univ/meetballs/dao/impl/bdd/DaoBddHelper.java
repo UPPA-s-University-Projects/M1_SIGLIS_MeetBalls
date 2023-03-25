@@ -6,6 +6,7 @@ import javax.persistence.PersistenceException;
 
 import fr.pau.univ.meetballs.dao.MeetBallsContextListener;
 import fr.pau.univ.meetballs.exception.DaoException;
+import fr.pau.univ.meetballs.model.User;
 
 //Cette classe simplifie la liaison entre notre projet, nos entités, notre base de données et l'entity manager. 
 public class DaoBddHelper {

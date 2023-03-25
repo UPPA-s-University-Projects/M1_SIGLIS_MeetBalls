@@ -1,13 +1,7 @@
 package fr.pau.univ.meetballs.tests;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,15 +10,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import fr.pau.univ.meetballs.model.CookType;
-import fr.pau.univ.meetballs.model.Diet;
 import fr.pau.univ.meetballs.model.User;
 
 public class UserTests {
@@ -56,19 +44,19 @@ public class UserTests {
 		System.out.println(" > Chargement des données users...");
 		
 		ct = Arrays.asList(c1, c3, c4);
-		u1 = new User(true, null, ct, null, null, null, 0);
-		
-		ct = Arrays.asList(c1, c4);
-		u2 = new User(false, null, ct, null, null, null, 0);
-		
-		ct = Arrays.asList(c2, c3);
-		u3 = new User(true, null, ct, null, null, null, 0);
-		
-		ct = Arrays.asList(c1, c4);
-		u4 = new User(true, null, ct, null, null, null, 0);
-		
-		ct = Arrays.asList(c1, c3, c4);
-		u5 = new User(false, null, ct, null, null, null, 0);
+//		u1 = new User(true, null, ct, null, null, null, 0);
+//		
+//		ct = Arrays.asList(c1, c4);
+//		u2 = new User(false, null, ct, null, null, null, 0);
+//		
+//		ct = Arrays.asList(c2, c3);
+//		u3 = new User(true, null, ct, null, null, null, 0);
+//		
+//		ct = Arrays.asList(c1, c4);
+//		u4 = new User(true, null, ct, null, null, null, 0);
+//		
+//		ct = Arrays.asList(c1, c3, c4);
+//		u5 = new User(false, null, ct, null, null, null, 0);
 	
 		System.out.println("Fin de chargement des données!");
 		System.out.println("==================================================================");

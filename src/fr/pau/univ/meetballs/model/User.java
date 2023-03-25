@@ -36,9 +36,10 @@ import javax.persistence.Transient;
 	//Find all users by their favorite cooktype which are not already liked, disliked or matched (get all new potential likeable users)
 	//This query is really important to filter as many users as possible and only return compatible user
 	@NamedQuery(name = "User.findNewUserToMatch", query = "SELECT u FROM User u WHERE :ctId = ANY (SELECT ct.id FROM u.favCookType ct) AND"
-			+ " :u = ANY(SELECT uLiked FROM u.likedUsers uLiked) AND" 
-			+ " :u = ANY(SELECT uMatched.id FROM u.matched uMatched) AND"
-			+ " :u = ANY(SELECT uDisliked FROM u.dislikedUser uDisliked)"),
+			+ " :likedId = ANY(SELECT uLiked FROM u.likedUsers uLiked) AND" 
+			+ " :matchedId = ANY(SELECT uMatched.id FROM u.matched uMatched) AND"
+			+ " :dislikedId = ANY(SELECT uDisliked FROM u.dislikedUser uDisliked)"),
+	@NamedQuery(name = "User.findAll", query="SELECT u FROM User u")
 //	@NamedQuery(name = "User.findPotentialMatches", query = "SELECT DISTINCT * FROM User AS other_usr WHERE other_usr.id IN ("
 //			+ "SELECT other_usr_cooktype.id_usr"
 //			+ "FROM usrFavCookType AS current_usr_cooktype"
@@ -125,7 +126,7 @@ public class User<T> {
 	 */
 	public User(int id, String nom, String prenom, String pwd, String pp, Date dob, boolean sex, String bio, String loc,
 			int perimetre, boolean desert, List<Diet> diets, List<CookType> favCookType, List<User> likedUsers,
-			List<User> dislikedUser, List<User> toMatch) {
+			List<User> dislikedUser) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -142,20 +143,18 @@ public class User<T> {
 		this.favCookType = favCookType;
 		this.likedUsers = likedUsers;
 		this.dislikedUser = dislikedUser;
-		this.toMatch = toMatch;
 	}
 	
 	
 	
 	public User(boolean desert, List<Diet> diets, List<CookType> favCookType,
-			List<User> likedUsers, List<User> dislikedUser, List<User> toMatch, float tauxCuisson) {
+			List<User> likedUsers, List<User> dislikedUser, float tauxCuisson) {
 		super();
 		this.desert = desert;
 		this.diets = diets;
 		this.favCookType = favCookType;
 		this.likedUsers = likedUsers;
 		this.dislikedUser = dislikedUser;
-		this.toMatch = toMatch;
 		this.tauxCuisson = tauxCuisson;
 	}
 
@@ -496,14 +495,6 @@ public class User<T> {
 	 */
 	public void setTauxCuisson(float tauxCuisson) {
 		this.tauxCuisson = tauxCuisson;
-	}
-
-	public List<User> getToMatch() {
-		return toMatch;
-	}
-
-	public void setToMatch(List<User> toMatch) {
-		this.toMatch = toMatch;
 	}
 
 	public List<User> getMatched() {
