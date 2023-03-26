@@ -34,6 +34,21 @@ public class UserDao implements IUserDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public User getLoginUser(String email, String pwd) throws DaoException {
+		
+		final TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findByLogin", User.class);
+		query.setParameter("email", email);
+		query.setParameter("pwd", pwd);
+		
+		final List<User> ret = query.getResultList();
+		
+		
+		if (ret.size() > 0) {
+			return ret.get(0);
+		}
+		return null;
+	}
 
 	@Override
 	public User getUserById(int id) throws DaoException {
@@ -73,9 +88,9 @@ public class UserDao implements IUserDao {
 	}
 	
 	@Override
-	public List getToMatchUser(User u, CookType ct) throws DaoException {
+	public List getToMatchUser(User u) throws DaoException {
 		TypedQuery<User> query = this.bdd.getEm().createNamedQuery("User.findNewUserToMatch", User.class);
-		query.setParameter("ctId", ct.getId());
+		query.setParameter("ctId", u.getFavCookType());
 		query.setParameter("u", u.getId());
 		
 		return query.getResultList();
@@ -133,6 +148,5 @@ public class UserDao implements IUserDao {
 		}
 	}
 
-	
 	
 }

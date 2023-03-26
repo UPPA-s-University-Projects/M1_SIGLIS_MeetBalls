@@ -9,10 +9,11 @@ import fr.pau.univ.meetballs.exception.DaoException;
 import fr.pau.univ.meetballs.model.User;
 
 //Cette classe simplifie la liaison entre notre projet, nos entités, notre base de données et l'entity manager. 
-public class DaoBddHelper {
+public class DaoBddHelper<T> {
 
 	private static DaoBddHelper instance;
 	private final EntityManager em;
+	private User<T> currentUser;
 
 	public enum PersistencyAction {
 		PERSIST,
@@ -41,13 +42,14 @@ public class DaoBddHelper {
 	 * @throws DaoException
 	 *
 	 */
-	private DaoBddHelper() throws DaoException {
+	public DaoBddHelper() throws DaoException {
 		try {
 			this.em = MeetBallsContextListener.getEntityManager();
 			System.out.println("EntityManager créé.");
 		} catch (final Exception e) {
 			throw new DaoException("Impossible de créer l'EntityManager.", e);
 		}
+		this.currentUser=null;
 	}
 
 	/**
@@ -121,6 +123,10 @@ public class DaoBddHelper {
 			}
 			throw e;
 		}
+	}
+	
+	public void setCurrentUser(User<T> u) {
+		this.currentUser = u;
 	}
 
 }

@@ -13,7 +13,8 @@ public interface IUserDao<T> {
 	public List<User<T>> getUsersByFavCookType(List<CookType> ct) throws DaoException;
 	public List<User<T>> getUsersByMatchedUser(User<T> u) throws DaoException;
 	public List<User<T>> getUsersByLikedUsers(User<T> u) throws DaoException;
-	public List<User<T>> getToMatchUser(User u, CookType ct) throws DaoException;
+	public List<User<T>> getToMatchUser(User u) throws DaoException;
+	public User<T> getLoginUser(String email, String pwd) throws DaoException;
 	//public List<User<T>> getUsersByIdentity(String identity) throws DaoException;
 	
 	//Methods to send data

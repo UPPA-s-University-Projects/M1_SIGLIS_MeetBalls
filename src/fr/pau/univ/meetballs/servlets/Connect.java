@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.rmi.ServerException;
 
 import fr.pau.univ.meetballs.dao.DaoFactory;
+import fr.pau.univ.meetballs.dao.impl.bdd.DaoBddHelper;
 import fr.pau.univ.meetballs.exception.DaoException;
+import fr.pau.univ.meetballs.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,25 +14,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/login/")
-public class Connect  extends HttpServlet{
+public class Connect <T> extends HttpServlet{
 
-	/**
-	 * Méthode qui gère les requêtes GET.
-	 * 
-	 * @param request La requête HTTP
-	 * @param response La réponse HTTP
-	 * @throws ServletException Si une erreur de servlet survient
-	 * @throws IOException Si une erreur d'entrée/sortie survient
-	 */
-	@Override
-	public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServerException, IOException, ServletException {
+	@Override 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("password");
+		
 		try {
-			request.setAttribute("users", DaoFactory.getInstance().getUserDao().getAllUsers());
-			System.out.println(DaoFactory.getInstance().getUserDao().getAllUsers().get(0).toString());
+			User<T> lu = DaoFactory.getInstance().getUserDao().getLoginUser(email, pwd);
+			DaoBddHelper<T> daoBddHelper = new DaoBddHelper<T>();
+			daoBddHelper.setCurrentUser(lu);
 		} catch (DaoException e) {
-			request.setAttribute("erreur", e.getMessage());
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.getServletContext().getRequestDispatcher("/test.jsp").forward(request, response);
-	}qa	
+		
+		
+	}
 }
