@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="Dish")
 @NamedQueries({
 	@NamedQuery(name = "Dish.findById", query = "SELECT d FROM Dish d WHERE d.id = :id"),
-	@NamedQuery(name = "Dish.findByCookType", query = "SELECT d FROM Dish d WHERE :typeOfDishId = ANY(SELECT ct.id FROM d.typeOfDish ct))"),
+	@NamedQuery(name = "Dish.findByCookType", query = "SELECT d FROM Dish d WHERE :typeOfDishId = ANY(SELECT ct.id FROM d.typeOfDish ct)"),
 })
 public class Dish {
 	private int id;

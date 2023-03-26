@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="Discussion")
 @NamedQueries({
 	@NamedQuery(name = "Discussion.findById", query = "SELECT d FROM Discussion d WHERE d.id = :id"),
-	@NamedQuery(name = "Discussion.findByMessage", query = "SELECT d FROM Discussion d WHERE :msgId = ANY(SELECT m FROM d.msg m ))"),
+	@NamedQuery(name = "Discussion.findByMessage", query = "SELECT d FROM Discussion d WHERE :msgId = ANY(SELECT m FROM d.msg m )"),
 	@NamedQuery(name = "Discussion.findByUser", query = "SELECT d FROM Discussion d WHERE :userId = ANY(SELECT u.id FROM d.person1 u) OR :userId= ANY(SELECT u.id FROM d.person2 u)")
 })
 public class Discussion {

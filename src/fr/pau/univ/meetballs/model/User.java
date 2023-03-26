@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="User")
+@Table(name="Usr")
 @NamedQueries({
 	//Find a user by its ID in our DB.
 	@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
@@ -55,9 +55,10 @@ import javax.persistence.Transient;
 public class User<T> {
 	//Nos attributs pour nos utilisateurs
 	private int id;
-	private String nom;
-	private String prenom;
+	private String name;
+	private String fname;
 	private String pwd;
+	private String email;
 	private String pp;
 	private Date dob;
 	private boolean sex;
@@ -91,12 +92,13 @@ public class User<T> {
 	 * @param perimetre
 	 * @param desert
 	 */
-	public User(int id, String nom, String prenom, String pwd, String pp, Date dob, boolean sex, String bio,
+	public User(int id, String nom, String prenom, String pwd, String email, String pp, Date dob, boolean sex, String bio,
 			String loc, int perimetre, boolean desert) {
 		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
+		this.name = nom;
+		this.fname = prenom;
 		this.pwd = pwd;
+		this.email = email;
 		this.pp = pp;
 		this.dob = dob;
 		this.sex = sex;
@@ -124,14 +126,15 @@ public class User<T> {
 	 * @param dislikedUser
 	 * @param toMatch
 	 */
-	public User(int id, String nom, String prenom, String pwd, String pp, Date dob, boolean sex, String bio, String loc,
+	public User(int id, String nom, String prenom, String pwd, String email, String pp, Date dob, boolean sex, String bio, String loc,
 			int perimetre, boolean desert, List<Diet> diets, List<CookType> favCookType, List<User> likedUsers,
 			List<User> dislikedUser) {
 		super();
 		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
+		this.name = nom;
+		this.fname = prenom;
 		this.pwd = pwd;
+		this.email=email;
 		this.pp = pp;
 		this.dob = dob;
 		this.sex = sex;
@@ -261,31 +264,31 @@ public class User<T> {
 	/**
 	 * @return the nom
 	 */
-	@Column(name = "nom")
-	public String getNom() {
-		return nom;
+	@Column(name = "name")
+	public String getName() {
+		return name;
 	}
 
 	/**
 	 * @param nom the nom to set
 	 */
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setName(String nom) {
+		this.name = nom;
 	}
 
 	/**
 	 * @return the prenom
 	 */
-	@Column(name = "prenom")
-	public String getPrenom() {
-		return prenom;
+	@Column(name = "fname")
+	public String getFName() {
+		return fname;
 	}
 
 	/**
 	 * @param prenom the prenom to set
 	 */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setFName(String prenom) {
+		this.fname = prenom;
 	}
 
 	/**
@@ -301,6 +304,22 @@ public class User<T> {
 	 */
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	
+
+	/**
+	 * @return the email
+	 */
+	@Column(name = "email")
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
